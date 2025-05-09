@@ -1,8 +1,11 @@
 import { Exclude } from "class-transformer";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Trip } from "src/trip/entities/trip.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class User {
+
+    
     @PrimaryGeneratedColumn()
     declare id: number;
 
@@ -15,4 +18,7 @@ export class User {
     @Exclude()
     @Column({ type: "varchar", length: 255})
     declare nip: string
+
+    @OneToMany(() => Trip, trip => trip.user)
+    declare trips: Trip[]
 }
